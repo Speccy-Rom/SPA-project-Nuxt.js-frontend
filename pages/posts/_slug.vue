@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Header :title=post.title />
+    <Header :h1=post.h1 />
     <div class="container">
       <div class="row">
         <div class="col-lg-8">
@@ -26,7 +26,7 @@
           <hr>
           <Comments />
         </div>
-        <Aside />
+        <Aside :tags=tags :aside=aside />
       </div>
     </div>
   </div>
@@ -46,10 +46,13 @@ export default {
   },
   layout: "post_detail",
   async asyncData({params}) {
-    console.log(params)
     const post = await axios.get(`http://127.0.0.1:8000/api/posts/${params.slug}`);
+    const tags = await axios.get(`http://127.0.0.1:8000/api/tags/`);
+    const aside = await axios.get(`http://127.0.0.1:8000/api/aside/`);
     return {
       post: post.data,
+      tags: tags.data,
+      aside: aside.data,
     }
   },
 }
