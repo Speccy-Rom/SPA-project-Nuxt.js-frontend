@@ -25,7 +25,6 @@
 </template>
 
 <script>
-import axios from "axios";
 export default {
   props: ['comments', 'post'],
   data() {
